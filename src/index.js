@@ -11,10 +11,33 @@ const node = function nodeFactory(data = null) {
 };
 
 const tree = function treeFactory(array) {
-  const tree = {};
+  let tree = {};
 
-  tree.root = buildTree(array);
+  let sortedArray = mergeSort(array);
+  console.log(sortedArray);
+
+  const length = array.length;
+
+  tree.root = buildTree(sortedArray, 0, length - 1);
+  return tree;
 };
 
-let array1 = [2, 4, 1, 12, 110, 1];
+const buildTree = function buildTreeFromArray(array, start, end) {
+  if (start > end) {
+    return null;
+  }
 
+  let mid = parseInt((start + end) / 2);
+  let newNode = node(array[mid]);
+
+  newNode.left = buildTree(array, start, mid - 1);
+  newNode.right = buildTree(array, mid + 1, end);
+
+  return newNode;
+};
+
+let array1 = [4, 6, 2, 67, 3, 1, 0];
+
+const newTree = tree(array1);
+
+console.log(newTree);
