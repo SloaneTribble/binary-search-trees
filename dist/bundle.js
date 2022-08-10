@@ -2,6 +2,38 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/insert-delete.js":
+/*!******************************!*\
+  !*** ./src/insert-delete.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "insertValue": () => (/* binding */ insertValue)
+/* harmony export */ });
+/* harmony import */ var _tree__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tree */ "./src/tree.js");
+
+
+const insertValue = function addLeafToTree(root, value) {
+  if (root == null) {
+    root = (0,_tree__WEBPACK_IMPORTED_MODULE_0__.node)(value);
+  }
+
+  if (value < root.data) {
+    root.left = insertValue(root.left, value);
+  } else if (value > root.data) {
+    root.right = insertValue(root.right, value);
+  }
+
+  return root;
+};
+
+
+
+
+/***/ }),
+
 /***/ "./src/merge-sort.js":
 /*!***************************!*\
   !*** ./src/merge-sort.js ***!
@@ -46,6 +78,87 @@ const mergeSort = function divideAndConquer(array) {
   let sortedRight = mergeSort(right);
 
   return merge(sortedLeft, sortedRight);
+};
+
+
+
+
+/***/ }),
+
+/***/ "./src/traverse.js":
+/*!*************************!*\
+  !*** ./src/traverse.js ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "preOrder": () => (/* binding */ preOrder)
+/* harmony export */ });
+const preOrder = function preOrderTraversal(node) {
+  if (node === null) {
+    return;
+  }
+  console.log(`${node.data}, `);
+  preOrder(node.left);
+  preOrder(node.right);
+};
+
+
+
+
+/***/ }),
+
+/***/ "./src/tree.js":
+/*!*********************!*\
+  !*** ./src/tree.js ***!
+  \*********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "buildTree": () => (/* binding */ buildTree),
+/* harmony export */   "node": () => (/* binding */ node),
+/* harmony export */   "tree": () => (/* binding */ tree)
+/* harmony export */ });
+/* harmony import */ var _merge_sort__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./merge-sort */ "./src/merge-sort.js");
+
+
+const node = function nodeFactory(data = null) {
+  const node = {};
+
+  node.left = null;
+  node.data = data;
+  node.right = null;
+
+  return node;
+};
+
+const tree = function treeFactory(array) {
+  let tree = {};
+
+  let sortedArray = (0,_merge_sort__WEBPACK_IMPORTED_MODULE_0__.mergeSort)(array);
+  console.log(sortedArray);
+
+  const length = array.length;
+
+  // The root is an object linking to all of its descendants
+  tree.root = buildTree(sortedArray, 0, length - 1);
+  return tree;
+};
+
+const buildTree = function buildTreeFromArray(array, start, end) {
+  if (start > end) {
+    return null;
+  }
+
+  let mid = parseInt((start + end) / 2);
+  let newNode = node(array[mid]);
+
+  newNode.left = buildTree(array, start, mid - 1);
+  newNode.right = buildTree(array, mid + 1, end);
+
+  return newNode;
 };
 
 
@@ -117,49 +230,28 @@ var __webpack_exports__ = {};
   \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _merge_sort__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./merge-sort */ "./src/merge-sort.js");
+/* harmony import */ var _traverse__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./traverse */ "./src/traverse.js");
+/* harmony import */ var _tree__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tree */ "./src/tree.js");
+/* harmony import */ var _insert_delete__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./insert-delete */ "./src/insert-delete.js");
 
 
-const node = function nodeFactory(data = null) {
-  const node = {};
 
-  node.left = null;
-  node.data = data;
-  node.right = null;
 
-  return node;
-};
 
-const tree = function treeFactory(array) {
-  let tree = {};
 
-  let sortedArray = (0,_merge_sort__WEBPACK_IMPORTED_MODULE_0__.mergeSort)(array);
-  console.log(sortedArray);
 
-  const length = array.length;
 
-  tree.root = buildTree(sortedArray, 0, length - 1);
-  return tree;
-};
+let array1 = [1, 2, 3, 4, 5, 6, 7];
 
-const buildTree = function buildTreeFromArray(array, start, end) {
-  if (start > end) {
-    return null;
-  }
+const newTree = (0,_tree__WEBPACK_IMPORTED_MODULE_2__.tree)(array1);
 
-  let mid = parseInt((start + end) / 2);
-  let newNode = node(array[mid]);
+console.log(newTree.root);
 
-  newNode.left = buildTree(array, start, mid - 1);
-  newNode.right = buildTree(array, mid + 1, end);
+(0,_traverse__WEBPACK_IMPORTED_MODULE_1__.preOrder)(newTree.root);
 
-  return newNode;
-};
+(0,_insert_delete__WEBPACK_IMPORTED_MODULE_3__.insertValue)(newTree.root, 15);
 
-let array1 = [4, 6, 2, 67, 3, 1, 0];
-
-const newTree = tree(array1);
-
-console.log(newTree);
+(0,_traverse__WEBPACK_IMPORTED_MODULE_1__.preOrder)(newTree.root);
 
 })();
 
