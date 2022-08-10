@@ -119,6 +119,50 @@ const mergeSort = function divideAndConquer(array) {
 
 /***/ }),
 
+/***/ "./src/search.js":
+/*!***********************!*\
+  !*** ./src/search.js ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "find": () => (/* binding */ find)
+/* harmony export */ });
+/**
+ * Given a node and a value to search, compare that node's data to the value
+ *
+ * If the node's data is larger, perform the search on the left subtree
+ *
+ * If the node's data is smaller, perform the search on the right subtree
+ *
+ * If the node's data is equal, return that node
+ *
+ * If you run out of nodes, return "not found"
+ */
+
+const find = function binarySeach(root, value) {
+  if (root == null) {
+    return "Not found";
+  }
+  if (root.data === value) {
+    return root;
+  }
+
+  if (root.data > value) {
+    return find(root.left, value);
+  }
+
+  if (root.data < value) {
+    return find(root.right, value);
+  }
+};
+
+
+
+
+/***/ }),
+
 /***/ "./src/traverse.js":
 /*!*************************!*\
   !*** ./src/traverse.js ***!
@@ -266,6 +310,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _traverse__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./traverse */ "./src/traverse.js");
 /* harmony import */ var _tree__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tree */ "./src/tree.js");
 /* harmony import */ var _insert_delete__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./insert-delete */ "./src/insert-delete.js");
+/* harmony import */ var _search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./search */ "./src/search.js");
+
+
 
 
 
@@ -287,6 +334,8 @@ console.log(newTree.root);
 (0,_insert_delete__WEBPACK_IMPORTED_MODULE_2__.deleteValue)(newTree.root, 3);
 
 (0,_traverse__WEBPACK_IMPORTED_MODULE_0__.preOrder)(newTree.root);
+
+console.log((0,_search__WEBPACK_IMPORTED_MODULE_3__.find)(newTree.root, 4));
 
 })();
 
