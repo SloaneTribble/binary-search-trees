@@ -10,6 +10,7 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "deleteValue": () => (/* binding */ deleteValue),
 /* harmony export */   "insertValue": () => (/* binding */ insertValue)
 /* harmony export */ });
 /* harmony import */ var _tree__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tree */ "./src/tree.js");
@@ -27,6 +28,39 @@ const insertValue = function addLeafToTree(root, value) {
   }
 
   return root;
+};
+
+const deleteValue = function removeNodeFromTree(root, value) {
+  if (root == null) {
+    return root;
+  }
+  if (value < root.data) {
+    root.left = deleteValue(root.left, value);
+  } else if (value > root.data) {
+    root.right = deleteValue(root.right, value);
+  } else {
+    if (root.left == null) {
+      return root.right;
+    } else if (root.right == null) {
+      return root.left;
+    }
+
+    root.data = minValue(root.right);
+
+    root.right = deleteValue(root.right, root.data);
+  }
+
+  return root;
+};
+
+const minValue = function findMinValue(root) {
+  let minV = root.data;
+
+  while (root.left != null) {
+    minV = root.left.data;
+    root = root.left;
+  }
+  return minV;
 };
 
 
@@ -229,12 +263,9 @@ var __webpack_exports__ = {};
   !*** ./src/index.js ***!
   \**********************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _merge_sort__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./merge-sort */ "./src/merge-sort.js");
-/* harmony import */ var _traverse__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./traverse */ "./src/traverse.js");
-/* harmony import */ var _tree__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tree */ "./src/tree.js");
-/* harmony import */ var _insert_delete__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./insert-delete */ "./src/insert-delete.js");
-
-
+/* harmony import */ var _traverse__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./traverse */ "./src/traverse.js");
+/* harmony import */ var _tree__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tree */ "./src/tree.js");
+/* harmony import */ var _insert_delete__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./insert-delete */ "./src/insert-delete.js");
 
 
 
@@ -243,15 +274,19 @@ __webpack_require__.r(__webpack_exports__);
 
 let array1 = [1, 2, 3, 4, 5, 6, 7];
 
-const newTree = (0,_tree__WEBPACK_IMPORTED_MODULE_2__.tree)(array1);
+const newTree = (0,_tree__WEBPACK_IMPORTED_MODULE_1__.tree)(array1);
 
 console.log(newTree.root);
 
-(0,_traverse__WEBPACK_IMPORTED_MODULE_1__.preOrder)(newTree.root);
+(0,_traverse__WEBPACK_IMPORTED_MODULE_0__.preOrder)(newTree.root);
 
-(0,_insert_delete__WEBPACK_IMPORTED_MODULE_3__.insertValue)(newTree.root, 15);
+(0,_insert_delete__WEBPACK_IMPORTED_MODULE_2__.insertValue)(newTree.root, 15);
 
-(0,_traverse__WEBPACK_IMPORTED_MODULE_1__.preOrder)(newTree.root);
+(0,_traverse__WEBPACK_IMPORTED_MODULE_0__.preOrder)(newTree.root);
+
+(0,_insert_delete__WEBPACK_IMPORTED_MODULE_2__.deleteValue)(newTree.root, 3);
+
+(0,_traverse__WEBPACK_IMPORTED_MODULE_0__.preOrder)(newTree.root);
 
 })();
 

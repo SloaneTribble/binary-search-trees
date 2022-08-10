@@ -1,10 +1,8 @@
-import { mergeSort } from "./merge-sort";
-
 import { preOrder } from "./traverse";
 
-import { node, tree, buildTree } from "./tree";
+import { tree } from "./tree";
 
-import { insertValue } from "./insert-delete";
+import { insertValue, deleteValue } from "./insert-delete";
 
 let array1 = [1, 2, 3, 4, 5, 6, 7];
 
@@ -15,5 +13,9 @@ console.log(newTree.root);
 preOrder(newTree.root);
 
 insertValue(newTree.root, 15);
+
+preOrder(newTree.root);
+
+deleteValue(newTree.root, 3);
 
 preOrder(newTree.root);
