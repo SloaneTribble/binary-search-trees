@@ -1,35 +1,48 @@
-const preOrder = function preOrderTraversal(node, arr = []) {
+const preOrder = function preOrderTraversal(node, callBack, arr = []) {
   if (node == null) {
     return;
   }
-  arr.push(node.data);
-  console.log(node.data);
-  preOrder(node.left, arr);
-  preOrder(node.right, arr);
+  if (!callBack) {
+    arr.push(node.data);
+  } else {
+    callBack(node.data);
+  }
+  preOrder(node.left, callBack, arr);
+  preOrder(node.right, callBack, arr);
 
   return arr;
 };
 
-const inOrder = function inOrderTraversal(node, array = []) {
+const inOrder = function inOrderTraversal(node, callBack, arr = []) {
   if (node === null) {
     return;
   }
-  inOrder(node.left);
-  array.push(node.data);
-  inOrder(node.right);
+  inOrder(node.left, callBack, arr);
 
-  return array;
+  if (!callBack) {
+    arr.push(node.data);
+  } else {
+    callBack(node.data);
+  }
+  inOrder(node.right, callBack, arr);
+
+  return arr;
 };
 
-const postOrder = function postOrderTraversal(node, array = []) {
+const postOrder = function postOrderTraversal(node, callBack, arr = []) {
   if (node === null) {
-    return array;
+    return;
   }
-  postOrder(node.left);
-  postOrder(node.right);
-  array.push(node.data);
+  postOrder(node.left, callBack, arr);
+  postOrder(node.right, callBack, arr);
 
-  return array;
+  if (!callBack) {
+    arr.push(node.data);
+  } else {
+    callBack(node.data);
+  }
+
+  return arr;
 };
 
 export { preOrder, inOrder, postOrder };

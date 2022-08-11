@@ -112,38 +112,51 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "postOrder": () => (/* binding */ postOrder),
 /* harmony export */   "preOrder": () => (/* binding */ preOrder)
 /* harmony export */ });
-const preOrder = function preOrderTraversal(node, arr = []) {
+const preOrder = function preOrderTraversal(node, callBack, arr = []) {
   if (node == null) {
     return;
   }
-  arr.push(node.data);
-  console.log(node.data);
-  preOrder(node.left, arr);
-  preOrder(node.right, arr);
+  if (!callBack) {
+    arr.push(node.data);
+  } else {
+    callBack(node.data);
+  }
+  preOrder(node.left, callBack, arr);
+  preOrder(node.right, callBack, arr);
 
   return arr;
 };
 
-const inOrder = function inOrderTraversal(node, array = []) {
+const inOrder = function inOrderTraversal(node, callBack, arr = []) {
   if (node === null) {
     return;
   }
-  inOrder(node.left);
-  array.push(node.data);
-  inOrder(node.right);
+  inOrder(node.left, callBack, arr);
 
-  return array;
+  if (!callBack) {
+    arr.push(node.data);
+  } else {
+    callBack(node.data);
+  }
+  inOrder(node.right, callBack, arr);
+
+  return arr;
 };
 
-const postOrder = function postOrderTraversal(node, array = []) {
+const postOrder = function postOrderTraversal(node, callBack, arr = []) {
   if (node === null) {
-    return array;
+    return;
   }
-  postOrder(node.left);
-  postOrder(node.right);
-  array.push(node.data);
+  postOrder(node.left, callBack, arr);
+  postOrder(node.right, callBack, arr);
 
-  return array;
+  if (!callBack) {
+    arr.push(node.data);
+  } else {
+    callBack(node.data);
+  }
+
+  return arr;
 };
 
 
@@ -459,13 +472,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+const dummy = function useless(node) {
+  console.log(`Callback for ${node}`);
+};
+
 let array1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
 const newTree = (0,_tree__WEBPACK_IMPORTED_MODULE_1__.tree)(array1);
 
 console.log(newTree.root);
 
-console.log((0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.preOrder)(newTree.root));
+console.log((0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.preOrder)(newTree.root, dummy));
+
+console.log((0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.inOrder)(newTree.root, dummy));
+
+console.log((0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.postOrder)(newTree.root, dummy));
 
 // insertValue(newTree.root, 15);
 
@@ -476,10 +497,6 @@ console.log((0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.preOrder)(newTree.root)
 (0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.preOrder)(newTree.root);
 
 // console.log(find(newTree.root, 4));
-
-const dummy = function useless(node) {
-  console.log("Useless!");
-};
 
 (0,_breadth_first__WEBPACK_IMPORTED_MODULE_4__.levelOrder)(newTree.root);
 
