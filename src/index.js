@@ -6,7 +6,7 @@ import { insertValue, deleteValue } from "./insert-delete";
 
 import { find } from "./search";
 
-import { levelOrder } from "./breadth-first";
+import { levelOrder, levelOrderRecursive } from "./breadth-first";
 
 let array1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
@@ -31,3 +31,5 @@ const dummy = function useless(node) {
 };
 
 levelOrder(newTree.root);
+
+levelOrderRecursive(newTree.root);

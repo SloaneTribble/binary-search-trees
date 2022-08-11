@@ -10,7 +10,8 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "levelOrder": () => (/* binding */ levelOrder)
+/* harmony export */   "levelOrder": () => (/* binding */ levelOrder),
+/* harmony export */   "levelOrderRecursive": () => (/* binding */ levelOrderRecursive)
 /* harmony export */ });
 /**
  * Accept a root and another function as parameters
@@ -25,10 +26,11 @@ __webpack_require__.r(__webpack_exports__);
 // push() to add element to end of array (enqueue)
 // shift() to remove element from beginning of array (dequeue)
 
+const basic = function defaultCallBack(node, array) {
+  array.push(node.data);
+};
+
 const levelOrder = function levelOrderTraverse(root, callBack) {
-  const basic = function defaultCallBack(node, array) {
-    array.push(node.data);
-  };
   if (root === null) {
     return;
   }
@@ -56,8 +58,42 @@ const levelOrder = function levelOrderTraverse(root, callBack) {
   }
 
   if (callBack == basic) {
+    console.log(traversal);
     return traversal;
   }
+};
+
+const levelOrderRecursive = function recursiveLevelOrderTraverse(
+  root,
+  callBack
+) {
+  if (!callBack) {
+    callBack = basic;
+  }
+  let traversal = [];
+  let queue = [];
+  queue.push(root);
+  recursiveComponent(queue, callBack, traversal);
+};
+
+const recursiveComponent = function recursion(queue, callBack, array) {
+  if (queue.length === 0) {
+    // If no callback was provided, an array was generated
+    if (array.length > 0) {
+      console.log(array);
+    }
+    return;
+  }
+
+  let currentNode = queue.shift();
+  callBack(currentNode, array);
+  if (currentNode.left) {
+    queue.push(currentNode.left);
+  }
+  if (currentNode.right) {
+    queue.push(currentNode.right);
+  }
+  recursiveComponent(queue, callBack, array);
 };
 
 
@@ -421,6 +457,8 @@ const dummy = function useless(node) {
 };
 
 (0,_breadth_first__WEBPACK_IMPORTED_MODULE_4__.levelOrder)(newTree.root);
+
+(0,_breadth_first__WEBPACK_IMPORTED_MODULE_4__.levelOrderRecursive)(newTree.root);
 
 })();
 
