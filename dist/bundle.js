@@ -2,6 +2,64 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/balance.js":
+/*!************************!*\
+  !*** ./src/balance.js ***!
+  \************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "balance": () => (/* binding */ balance),
+/* harmony export */   "isBalanced": () => (/* binding */ isBalanced)
+/* harmony export */ });
+/* harmony import */ var _height_depth_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./height-depth.js */ "./src/height-depth.js");
+/* harmony import */ var _breadth_first__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./breadth-first */ "./src/breadth-first.js");
+/* harmony import */ var _merge_sort__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./merge-sort */ "./src/merge-sort.js");
+/* harmony import */ var _tree__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tree */ "./src/tree.js");
+
+
+
+
+
+
+
+
+const isBalanced = function checkIfBalanced(root) {
+  if (root == null) {
+    return true;
+  }
+
+  let leftHeight = (0,_height_depth_js__WEBPACK_IMPORTED_MODULE_0__.height)(root.left);
+  let rightHeight = (0,_height_depth_js__WEBPACK_IMPORTED_MODULE_0__.height)(root.right);
+
+  if (
+    Math.abs(leftHeight - rightHeight) <= 1 &&
+    isBalanced(root.left) == true &&
+    isBalanced(root.right) == true
+  ) {
+    return true;
+  }
+
+  return false;
+};
+
+/**
+ * Balance function should traverse tree to get array of values,
+ * sort that array, then generate a new tree
+ */
+
+const balance = function traverseAndReplace(root) {
+  let values = (0,_breadth_first__WEBPACK_IMPORTED_MODULE_1__.levelOrder)(root);
+
+  return (0,_tree__WEBPACK_IMPORTED_MODULE_3__.tree)(values);
+};
+
+
+
+
+/***/ }),
+
 /***/ "./src/breadth-first.js":
 /*!******************************!*\
   !*** ./src/breadth-first.js ***!
@@ -520,6 +578,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./search */ "./src/search.js");
 /* harmony import */ var _breadth_first__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./breadth-first */ "./src/breadth-first.js");
 /* harmony import */ var _height_depth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./height-depth */ "./src/height-depth.js");
+/* harmony import */ var _balance__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./balance */ "./src/balance.js");
+
+
 
 
 
@@ -565,6 +626,17 @@ const newTree = (0,_tree__WEBPACK_IMPORTED_MODULE_1__.tree)(array1);
 console.log((0,_height_depth__WEBPACK_IMPORTED_MODULE_5__.height)(newTree.root.left));
 
 console.log((0,_height_depth__WEBPACK_IMPORTED_MODULE_5__.depth)(newTree.root, 5));
+
+console.log((0,_balance__WEBPACK_IMPORTED_MODULE_6__.isBalanced)(newTree.root));
+
+(0,_insert_delete__WEBPACK_IMPORTED_MODULE_2__.deleteValue)(newTree.root, 3);
+(0,_insert_delete__WEBPACK_IMPORTED_MODULE_2__.insertValue)(newTree.root, 3);
+
+console.log((0,_balance__WEBPACK_IMPORTED_MODULE_6__.isBalanced)(newTree.root));
+
+const balanced = (0,_balance__WEBPACK_IMPORTED_MODULE_6__.balance)(newTree.root);
+
+console.log((0,_balance__WEBPACK_IMPORTED_MODULE_6__.isBalanced)(balanced));
 
 })();
 

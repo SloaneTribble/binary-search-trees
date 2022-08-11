@@ -10,6 +10,8 @@ import { levelOrder, levelOrderRecursive } from "./breadth-first";
 
 import { height, depth } from "./height-depth";
 
+import { isBalanced, balance } from "./balance";
+
 const dummy = function useless(node) {
   return `Callback for ${node}`;
 };
@@ -43,3 +45,14 @@ levelOrderRecursive(newTree.root);
 console.log(height(newTree.root.left));
 
 console.log(depth(newTree.root, 5));
+
+console.log(isBalanced(newTree.root));
+
+deleteValue(newTree.root, 3);
+insertValue(newTree.root, 3);
+
+console.log(isBalanced(newTree.root));
+
+const balanced = balance(newTree.root);
+
+console.log(isBalanced(balanced));
