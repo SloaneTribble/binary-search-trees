@@ -2,8 +2,6 @@ import { node } from "./tree";
 
 import { find } from "./search";
 
-// Must avoid duplicates to prevent complications
-
 const addValue = function addLeafToTree(root, value) {
   if (root == null) {
     root = node(value);
@@ -19,6 +17,7 @@ const addValue = function addLeafToTree(root, value) {
 };
 
 const insertValue = function checkForDupsThenInsert(root, value) {
+  // Must avoid duplicates to prevent complications
   if (find(root, value) === "Not found") {
     addValue(root, value);
   } else {

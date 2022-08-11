@@ -43,7 +43,6 @@ const levelOrder = function levelOrderTraverse(root, callBack) {
   }
 
   if (callBack == basic) {
-    console.log(traversal);
     return traversal;
   }
 };
@@ -65,7 +64,7 @@ const recursiveComponent = function recursion(queue, callBack, array) {
   if (queue.length === 0) {
     // If no callback was provided, an array was generated
     if (array.length > 0) {
-      console.log(array);
+      // console.log(array);
     }
     return;
   }

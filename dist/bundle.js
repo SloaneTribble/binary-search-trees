@@ -58,7 +58,6 @@ const levelOrder = function levelOrderTraverse(root, callBack) {
   }
 
   if (callBack == basic) {
-    console.log(traversal);
     return traversal;
   }
 };
@@ -80,7 +79,7 @@ const recursiveComponent = function recursion(queue, callBack, array) {
   if (queue.length === 0) {
     // If no callback was provided, an array was generated
     if (array.length > 0) {
-      console.log(array);
+      // console.log(array);
     }
     return;
   }
@@ -109,15 +108,42 @@ const recursiveComponent = function recursion(queue, callBack, array) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "inOrder": () => (/* binding */ inOrder),
+/* harmony export */   "postOrder": () => (/* binding */ postOrder),
 /* harmony export */   "preOrder": () => (/* binding */ preOrder)
 /* harmony export */ });
-const preOrder = function preOrderTraversal(node) {
+const preOrder = function preOrderTraversal(node, arr = []) {
+  if (node == null) {
+    return;
+  }
+  arr.push(node.data);
+  console.log(node.data);
+  preOrder(node.left, arr);
+  preOrder(node.right, arr);
+
+  return arr;
+};
+
+const inOrder = function inOrderTraversal(node, array = []) {
   if (node === null) {
     return;
   }
-  // console.log(node.data);
-  preOrder(node.left);
-  preOrder(node.right);
+  inOrder(node.left);
+  array.push(node.data);
+  inOrder(node.right);
+
+  return array;
+};
+
+const postOrder = function postOrderTraversal(node, array = []) {
+  if (node === null) {
+    return array;
+  }
+  postOrder(node.left);
+  postOrder(node.right);
+  array.push(node.data);
+
+  return array;
 };
 
 
@@ -142,8 +168,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// Must avoid duplicates to prevent complications
-
 const addValue = function addLeafToTree(root, value) {
   if (root == null) {
     root = (0,_tree__WEBPACK_IMPORTED_MODULE_0__.node)(value);
@@ -159,6 +183,7 @@ const addValue = function addLeafToTree(root, value) {
 };
 
 const insertValue = function checkForDupsThenInsert(root, value) {
+  // Must avoid duplicates to prevent complications
   if ((0,_search__WEBPACK_IMPORTED_MODULE_1__.find)(root, value) === "Not found") {
     addValue(root, value);
   } else {
@@ -440,17 +465,17 @@ const newTree = (0,_tree__WEBPACK_IMPORTED_MODULE_1__.tree)(array1);
 
 console.log(newTree.root);
 
-(0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.preOrder)(newTree.root);
+console.log((0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.preOrder)(newTree.root));
 
 // insertValue(newTree.root, 15);
 
 (0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.preOrder)(newTree.root);
 
-// deleteValue(newTree.root, 3);
+(0,_insert_delete__WEBPACK_IMPORTED_MODULE_2__.deleteValue)(newTree.root, 3);
 
 (0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.preOrder)(newTree.root);
 
-console.log((0,_search__WEBPACK_IMPORTED_MODULE_3__.find)(newTree.root, 4));
+// console.log(find(newTree.root, 4));
 
 const dummy = function useless(node) {
   console.log("Useless!");
