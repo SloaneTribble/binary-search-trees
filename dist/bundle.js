@@ -2,6 +2,69 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/breadth-first.js":
+/*!******************************!*\
+  !*** ./src/breadth-first.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "levelOrder": () => (/* binding */ levelOrder)
+/* harmony export */ });
+/**
+ * Accept a root and another function as parameters
+ * Traverse the tree in breadth-first level order and pass each node as an
+ * argument to the provided function.
+ *
+ * If no function is given, return an array of values.
+ *
+ * Use a queue to keep track of child nodes to be traversed.
+ */
+
+// push() to add element to end of array (enqueue)
+// shift() to remove element from beginning of array (dequeue)
+
+const levelOrder = function levelOrderTraverse(root, callBack) {
+  const basic = function defaultCallBack(node, array) {
+    array.push(node.data);
+  };
+  if (root === null) {
+    return;
+  }
+
+  if (!callBack) {
+    callBack = basic;
+  }
+
+  // Only used if no callback is provided
+  let traversal = [];
+
+  let queue = [];
+  queue.push(root);
+
+  while (queue.length > 0) {
+    let current = queue.shift();
+    callBack(current, traversal);
+
+    if (current.left != null) {
+      queue.push(current.left);
+    }
+    if (current.right != null) {
+      queue.push(current.right);
+    }
+  }
+
+  if (callBack == basic) {
+    return traversal;
+  }
+};
+
+
+
+
+/***/ }),
+
 /***/ "./src/depth-first.js":
 /*!****************************!*\
   !*** ./src/depth-first.js ***!
@@ -324,6 +387,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tree__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tree */ "./src/tree.js");
 /* harmony import */ var _insert_delete__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./insert-delete */ "./src/insert-delete.js");
 /* harmony import */ var _search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./search */ "./src/search.js");
+/* harmony import */ var _breadth_first__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./breadth-first */ "./src/breadth-first.js");
 
 
 
@@ -332,7 +396,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-let array1 = [1, 2, 3, 4, 5, 6, 7];
+
+
+let array1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
 const newTree = (0,_tree__WEBPACK_IMPORTED_MODULE_1__.tree)(array1);
 
@@ -340,15 +406,21 @@ console.log(newTree.root);
 
 (0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.preOrder)(newTree.root);
 
-(0,_insert_delete__WEBPACK_IMPORTED_MODULE_2__.insertValue)(newTree.root, 15);
+// insertValue(newTree.root, 15);
 
 (0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.preOrder)(newTree.root);
 
-(0,_insert_delete__WEBPACK_IMPORTED_MODULE_2__.deleteValue)(newTree.root, 3);
+// deleteValue(newTree.root, 3);
 
 (0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.preOrder)(newTree.root);
 
 console.log((0,_search__WEBPACK_IMPORTED_MODULE_3__.find)(newTree.root, 4));
+
+const dummy = function useless(node) {
+  console.log("Useless!");
+};
+
+(0,_breadth_first__WEBPACK_IMPORTED_MODULE_4__.levelOrder)(newTree.root);
 
 })();
 
