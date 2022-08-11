@@ -8,7 +8,7 @@ import { find } from "./search";
 
 import { levelOrder, levelOrderRecursive } from "./breadth-first";
 
-import { height } from "./height-depth";
+import { height, depth } from "./height-depth";
 
 const dummy = function useless(node) {
   return `Callback for ${node}`;
@@ -30,7 +30,7 @@ const newTree = tree(array1);
 
 preOrder(newTree.root);
 
-deleteValue(newTree.root, 3);
+// deleteValue(newTree.root, 3);
 
 preOrder(newTree.root);
 
@@ -41,3 +41,5 @@ levelOrder(newTree.root);
 levelOrderRecursive(newTree.root);
 
 console.log(height(newTree.root.left));
+
+console.log(depth(newTree.root, 5));

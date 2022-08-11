@@ -172,6 +172,7 @@ const postOrder = function postOrderTraversal(node, callBack, arr = []) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "depth": () => (/* binding */ depth),
 /* harmony export */   "height": () => (/* binding */ height)
 /* harmony export */ });
 /**
@@ -194,6 +195,25 @@ const max = function getMax(a, b) {
   } else {
     return b;
   }
+};
+
+const depth = function findDepth(root, x) {
+  // If tree is empty
+  if (root == null) {
+    return -1;
+  }
+  let distance = -1;
+
+  if (
+    root.data == x ||
+    // If x is present in either subtree
+    (distance = depth(root.left, x)) >= 0 ||
+    (distance = depth(root.right, x)) >= 0
+  ) {
+    return distance + 1;
+  }
+
+  return distance;
 };
 
 
@@ -532,7 +552,7 @@ const newTree = (0,_tree__WEBPACK_IMPORTED_MODULE_1__.tree)(array1);
 
 (0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.preOrder)(newTree.root);
 
-(0,_insert_delete__WEBPACK_IMPORTED_MODULE_2__.deleteValue)(newTree.root, 3);
+// deleteValue(newTree.root, 3);
 
 (0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.preOrder)(newTree.root);
 
@@ -543,6 +563,8 @@ const newTree = (0,_tree__WEBPACK_IMPORTED_MODULE_1__.tree)(array1);
 (0,_breadth_first__WEBPACK_IMPORTED_MODULE_4__.levelOrderRecursive)(newTree.root);
 
 console.log((0,_height_depth__WEBPACK_IMPORTED_MODULE_5__.height)(newTree.root.left));
+
+console.log((0,_height_depth__WEBPACK_IMPORTED_MODULE_5__.depth)(newTree.root, 5));
 
 })();
 

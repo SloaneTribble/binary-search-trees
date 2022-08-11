@@ -20,4 +20,23 @@ const max = function getMax(a, b) {
   }
 };
 
-export { height };
+const depth = function findDepth(root, x) {
+  // If tree is empty
+  if (root == null) {
+    return -1;
+  }
+  let distance = -1;
+
+  if (
+    root.data == x ||
+    // If x is present in either subtree
+    (distance = depth(root.left, x)) >= 0 ||
+    (distance = depth(root.right, x)) >= 0
+  ) {
+    return distance + 1;
+  }
+
+  return distance;
+};
+
+export { height, depth };
