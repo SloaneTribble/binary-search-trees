@@ -119,7 +119,7 @@ const preOrder = function preOrderTraversal(node, callBack, arr = []) {
   if (!callBack) {
     arr.push(node.data);
   } else {
-    callBack(node.data);
+    arr.push(callBack(node.data));
   }
   preOrder(node.left, callBack, arr);
   preOrder(node.right, callBack, arr);
@@ -136,7 +136,7 @@ const inOrder = function inOrderTraversal(node, callBack, arr = []) {
   if (!callBack) {
     arr.push(node.data);
   } else {
-    callBack(node.data);
+    arr.push(callBack(node.data));
   }
   inOrder(node.right, callBack, arr);
 
@@ -153,10 +153,47 @@ const postOrder = function postOrderTraversal(node, callBack, arr = []) {
   if (!callBack) {
     arr.push(node.data);
   } else {
-    callBack(node.data);
+    arr.push(callBack(node.data));
   }
 
   return arr;
+};
+
+
+
+
+/***/ }),
+
+/***/ "./src/height-depth.js":
+/*!*****************************!*\
+  !*** ./src/height-depth.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "height": () => (/* binding */ height)
+/* harmony export */ });
+/**
+ * Given a node, return the number of edges in longest path from a given node to a leaf node
+ */
+
+const height = function getHeight(node) {
+  if (node == null) {
+    return 0;
+  }
+  let leftHeight = height(node.left);
+  let rightHeight = height(node.right);
+
+  return max(leftHeight, rightHeight) + 1;
+};
+
+const max = function getMax(a, b) {
+  if (a > b) {
+    return a;
+  } else {
+    return b;
+  }
 };
 
 
@@ -462,6 +499,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _insert_delete__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./insert-delete */ "./src/insert-delete.js");
 /* harmony import */ var _search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./search */ "./src/search.js");
 /* harmony import */ var _breadth_first__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./breadth-first */ "./src/breadth-first.js");
+/* harmony import */ var _height_depth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./height-depth */ "./src/height-depth.js");
+
+
 
 
 
@@ -473,20 +513,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const dummy = function useless(node) {
-  console.log(`Callback for ${node}`);
+  return `Callback for ${node}`;
 };
 
 let array1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
 const newTree = (0,_tree__WEBPACK_IMPORTED_MODULE_1__.tree)(array1);
 
-console.log(newTree.root);
+// console.log(newTree.root);
 
-console.log((0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.preOrder)(newTree.root, dummy));
+// console.log(preOrder(newTree.root, dummy));
 
-console.log((0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.inOrder)(newTree.root, dummy));
+// console.log(inOrder(newTree.root, dummy));
 
-console.log((0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.postOrder)(newTree.root, dummy));
+// console.log(postOrder(newTree.root, dummy));
 
 // insertValue(newTree.root, 15);
 
@@ -501,6 +541,8 @@ console.log((0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.postOrder)(newTree.root
 (0,_breadth_first__WEBPACK_IMPORTED_MODULE_4__.levelOrder)(newTree.root);
 
 (0,_breadth_first__WEBPACK_IMPORTED_MODULE_4__.levelOrderRecursive)(newTree.root);
+
+console.log((0,_height_depth__WEBPACK_IMPORTED_MODULE_5__.height)(newTree.root.left));
 
 })();
 

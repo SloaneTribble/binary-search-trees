@@ -8,21 +8,23 @@ import { find } from "./search";
 
 import { levelOrder, levelOrderRecursive } from "./breadth-first";
 
+import { height } from "./height-depth";
+
 const dummy = function useless(node) {
-  console.log(`Callback for ${node}`);
+  return `Callback for ${node}`;
 };
 
 let array1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
 const newTree = tree(array1);
 
-console.log(newTree.root);
+// console.log(newTree.root);
 
-console.log(preOrder(newTree.root, dummy));
+// console.log(preOrder(newTree.root, dummy));
 
-console.log(inOrder(newTree.root, dummy));
+// console.log(inOrder(newTree.root, dummy));
 
-console.log(postOrder(newTree.root, dummy));
+// console.log(postOrder(newTree.root, dummy));
 
 // insertValue(newTree.root, 15);
 
@@ -37,3 +39,5 @@ preOrder(newTree.root);
 levelOrder(newTree.root);
 
 levelOrderRecursive(newTree.root);
+
+console.log(height(newTree.root.left));
