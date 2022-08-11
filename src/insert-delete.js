@@ -1,17 +1,29 @@
 import { node } from "./tree";
 
-const insertValue = function addLeafToTree(root, value) {
+import { find } from "./search";
+
+// Must avoid duplicates to prevent complications
+
+const addValue = function addLeafToTree(root, value) {
   if (root == null) {
     root = node(value);
   }
 
   if (value < root.data) {
-    root.left = insertValue(root.left, value);
+    root.left = addValue(root.left, value);
   } else if (value > root.data) {
-    root.right = insertValue(root.right, value);
+    root.right = addValue(root.right, value);
   }
 
   return root;
+};
+
+const insertValue = function checkForDupsThenInsert(root, value) {
+  if (find(root, value) === "Not found") {
+    addValue(root, value);
+  } else {
+    return "Cannot add duplicates";
+  }
 };
 
 const deleteValue = function removeNodeFromTree(root, value) {

@@ -1,4 +1,4 @@
-import { preOrder } from "./traverse";
+import { preOrder } from "./depth-first";
 
 import { tree } from "./tree";
 
