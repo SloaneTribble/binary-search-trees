@@ -16,43 +16,43 @@ const dummy = function useless(node) {
   return `Callback for ${node}`;
 };
 
-let array1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+// Create a BST from an array of random numbers
+let array1 = [10, 1, 4, 3, 2, 12, 9, 8, 6, 5, 7];
 
 const newTree = tree(array1);
 
-// console.log(newTree.root);
+const treeRoot = newTree.root;
 
-// console.log(preOrder(newTree.root, dummy));
+// Confirm that the tree is balanced
 
-// console.log(inOrder(newTree.root, dummy));
+console.log(isBalanced(treeRoot));
 
-// console.log(postOrder(newTree.root, dummy));
+console.log(levelOrder(treeRoot));
+console.log(preOrder(treeRoot));
+console.log(inOrder(treeRoot));
+console.log(postOrder(treeRoot));
 
-// insertValue(newTree.root, 15);
+// Unbalance the tree
 
-preOrder(newTree.root);
+insertValue(treeRoot, 300);
+insertValue(treeRoot, 200);
+insertValue(treeRoot, 100);
 
-// deleteValue(newTree.root, 3);
+// Confirm that tree is unbalanced
 
-preOrder(newTree.root);
+console.log(isBalanced(treeRoot));
 
-// console.log(find(newTree.root, 4));
+// Balance the tree
 
-levelOrder(newTree.root);
+const balancedTree = balance(treeRoot);
 
-levelOrderRecursive(newTree.root);
+const balancedRoot = balancedTree.root;
 
-console.log(height(newTree.root.left));
+// Confirm that tree is balanced
 
-console.log(depth(newTree.root, 5));
+console.log(isBalanced(balancedRoot));
 
-console.log(isBalanced(newTree.root));
-
-deleteValue(newTree.root, 3);
-insertValue(newTree.root, 3);
-
-console.log(isBalanced(newTree.root));
-
-const balanced = balance(newTree.root);
-
-console.log(isBalanced(balanced));
+console.log(levelOrder(balancedRoot));
+console.log(preOrder(balancedRoot));
+console.log(inOrder(balancedRoot));
+console.log(postOrder(balancedRoot));

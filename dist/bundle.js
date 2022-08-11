@@ -481,7 +481,6 @@ const tree = function treeFactory(array) {
   let tree = {};
 
   let sortedArray = (0,_merge_sort__WEBPACK_IMPORTED_MODULE_0__.mergeSort)(array);
-  console.log(sortedArray);
 
   const length = array.length;
 
@@ -597,46 +596,46 @@ const dummy = function useless(node) {
   return `Callback for ${node}`;
 };
 
-let array1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+// Create a BST from an array of random numbers
+let array1 = [10, 1, 4, 3, 2, 12, 9, 8, 6, 5, 7];
 
 const newTree = (0,_tree__WEBPACK_IMPORTED_MODULE_1__.tree)(array1);
 
-// console.log(newTree.root);
+const treeRoot = newTree.root;
 
-// console.log(preOrder(newTree.root, dummy));
+// Confirm that the tree is balanced
 
-// console.log(inOrder(newTree.root, dummy));
+console.log((0,_balance__WEBPACK_IMPORTED_MODULE_6__.isBalanced)(treeRoot));
 
-// console.log(postOrder(newTree.root, dummy));
+console.log((0,_breadth_first__WEBPACK_IMPORTED_MODULE_4__.levelOrder)(treeRoot));
+console.log((0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.preOrder)(treeRoot));
+console.log((0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.inOrder)(treeRoot));
+console.log((0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.postOrder)(treeRoot));
 
-// insertValue(newTree.root, 15);
+// Unbalance the tree
 
-(0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.preOrder)(newTree.root);
+(0,_insert_delete__WEBPACK_IMPORTED_MODULE_2__.insertValue)(treeRoot, 300);
+(0,_insert_delete__WEBPACK_IMPORTED_MODULE_2__.insertValue)(treeRoot, 200);
+(0,_insert_delete__WEBPACK_IMPORTED_MODULE_2__.insertValue)(treeRoot, 100);
 
-// deleteValue(newTree.root, 3);
+// Confirm that tree is unbalanced
 
-(0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.preOrder)(newTree.root);
+console.log((0,_balance__WEBPACK_IMPORTED_MODULE_6__.isBalanced)(treeRoot));
 
-// console.log(find(newTree.root, 4));
+// Balance the tree
 
-(0,_breadth_first__WEBPACK_IMPORTED_MODULE_4__.levelOrder)(newTree.root);
+const balancedTree = (0,_balance__WEBPACK_IMPORTED_MODULE_6__.balance)(treeRoot);
 
-(0,_breadth_first__WEBPACK_IMPORTED_MODULE_4__.levelOrderRecursive)(newTree.root);
+const balancedRoot = balancedTree.root;
 
-console.log((0,_height_depth__WEBPACK_IMPORTED_MODULE_5__.height)(newTree.root.left));
+// Confirm that tree is balanced
 
-console.log((0,_height_depth__WEBPACK_IMPORTED_MODULE_5__.depth)(newTree.root, 5));
+console.log((0,_balance__WEBPACK_IMPORTED_MODULE_6__.isBalanced)(balancedRoot));
 
-console.log((0,_balance__WEBPACK_IMPORTED_MODULE_6__.isBalanced)(newTree.root));
-
-(0,_insert_delete__WEBPACK_IMPORTED_MODULE_2__.deleteValue)(newTree.root, 3);
-(0,_insert_delete__WEBPACK_IMPORTED_MODULE_2__.insertValue)(newTree.root, 3);
-
-console.log((0,_balance__WEBPACK_IMPORTED_MODULE_6__.isBalanced)(newTree.root));
-
-const balanced = (0,_balance__WEBPACK_IMPORTED_MODULE_6__.balance)(newTree.root);
-
-console.log((0,_balance__WEBPACK_IMPORTED_MODULE_6__.isBalanced)(balanced));
+console.log((0,_breadth_first__WEBPACK_IMPORTED_MODULE_4__.levelOrder)(balancedRoot));
+console.log((0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.preOrder)(balancedRoot));
+console.log((0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.inOrder)(balancedRoot));
+console.log((0,_depth_first__WEBPACK_IMPORTED_MODULE_0__.postOrder)(balancedRoot));
 
 })();
 

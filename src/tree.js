@@ -14,7 +14,6 @@ const tree = function treeFactory(array) {
   let tree = {};
 
   let sortedArray = mergeSort(array);
-  console.log(sortedArray);
 
   const length = array.length;
 
